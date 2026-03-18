@@ -132,3 +132,28 @@ Dường như nó so sánh giá trị số 2
 
 
 
+tạo map 
+key là chữ 0-9
+[824,938,1399,5607,6973,5703,9609,4398,8247]
+"0": 
+"1": 1399, 
+"2": 
+"3": 
+"4": 4398
+"5": 5607, 5703
+"6": 6973, 
+"7": 
+"8": 824, 8247 
+"9": 938, 9609
+
+map<char,int> map;
+
+for (int n : nums){
+    string toStrNum = to_string(n);
+    key = toStrNum[0];
+    key đó không tồn tại 
+    tạo key mới 
+    nạp giá trị vào key
+}
+
+duyệt từ case có key 9 - 0 giá trị từ cao
