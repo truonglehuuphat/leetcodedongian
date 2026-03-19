@@ -157,3 +157,122 @@ for (int n : nums){
 }
 
 duyệt từ case có key 9 - 0 giá trị từ cao
+
+sắp xếp mãng giảm dần trong từ key 
+do số ở cuối chắc chắn là số nhỏ nhất và có ý ký tự nhất 
+lập theo số lượng mãng chia 2 
+duyệt từ sau lên truớc 
+kiếm tra index số phía trước có nhỏ size của nó không 
+nếu ký tự  của a[ia] > b[ib] thì đổi chỗ 
+nếu ký tự a[ia] > b[ib] thì tăng biến
+        ia++, ib++; 
+        kiểm tra ia == a.size() thì trừ ia đi 1; để xét ký tự a ở cuối
+        kiểm tra ia > 1 ib > 1 mà ib= ia + 1
+            nếu a[0] > b[cuối]{
+                    đổi chỗ a và b;
+            }
+nếu ký tự a[ia] < b[ib] thoát ra kiểm tra biến kế tiếp         
+
+class Solution {
+public:
+    string findMaxNumInStr(string str1, string str2){
+        string res;
+        for(int i = 0; i < str1.length(); i++){
+            if((str1[i]-48) < (str2[i]-48)){
+                return str2;
+            } else if((str1[i]-48) > (str2[i]-48)){
+                return str1;
+            } else{
+
+            }
+        }
+        return str1;
+    }
+    void sortSecondChar(vector<int>& nums){
+        sort(nums.begin(), nums.end(), greater<int>());
+        for(int j = 0; j < nums.size()/2; j++){
+            for(int i = nums.size()-1; i >= 1; i--){
+                int flag = 0;
+                    string a = to_string(nums[i]);    
+                    string b = to_string(nums[i-1]);
+                    int charA = 0;
+                    int charB = 0;
+                    while(charB < b.size()){
+                        if(a[charA] > b[charB]){
+                            int temp = nums[i-1];
+                            nums[i-1] = nums[i];
+                            nums[i] = temp;
+                            flag = 1;
+                            break;
+                        } else if (a[charA] == b[charB]){
+                            charB++;
+                            charA++;
+                            if(charA >= a.size()){
+                                charA--;
+                            }
+                            if(charB > 1 && charA > 1 && charB == charA + 1){
+                                if(a[0] > b[charB]){
+                                    int temp = nums[i-1];
+                                    nums[i-1] = nums[i];
+                                    nums[i] = temp;
+                                    flag = 1;
+                                    break;
+                                }
+                            }
+                        } else{
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    
+    string largestNumber(vector<int>& nums) {
+        if (nums.size() == 1) return to_string(nums[0]);
+        string max ="";
+        map<char,vector<int>> map;
+        for(int n : nums){
+            string toStrNum = to_string(n);
+            char key = toStrNum[0];
+            map[key].push_back(n);
+        }
+        if(map.size() == 1 ){
+            auto findZero = map.find('0');
+            if(findZero != map.end()){
+                return "0";
+            }
+        }
+        vector<string> listStrMaxNum;
+        for (auto x: map){
+            vector<int> numStr = x.second;
+            sortSecondChar(numStr);
+            for(int tempNum : numStr){
+                cout << tempNum << ":";
+            }
+            cout << "\n";
+            if(numStr.size() == 1){
+                listStrMaxNum.push_back(to_string(numStr[0]));
+            } else{
+                string a = to_string(numStr[0]) + to_string(numStr[1]);
+                string b = to_string(numStr[1]) + to_string(numStr[0]);
+                string tempMax = findMaxNumInStr(a,b);
+                for(int i = 2 ; i < numStr.size(); i++){
+                    a = tempMax + to_string(numStr[i]);
+                    b = to_string(numStr[i]) + tempMax;
+                    tempMax = findMaxNumInStr(a,b);
+                }
+                 listStrMaxNum.push_back(tempMax);
+            }
+        }
+
+        // for(string s: listStrMaxNum){
+        //     cout << s << " ";
+        // }
+        cout << endl;
+        for(int i = listStrMaxNum.size() - 1; i >= 0; i--){
+            max = max + listStrMaxNum[i];
+        }
+
+        return max;
+    }
+};
