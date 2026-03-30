@@ -37,3 +37,21 @@ public:
         return -1;
     }
 };
+
+
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        int n = nums.size();
+        int majN = n/2;
+        map<int,int> map;
+        int res = 0;
+        for(int i: nums){
+            map[i] = 1 + map[i];
+            if(map[i] > majN){
+                res = i;
+            }
+        }
+        return res;
+    }
+};
