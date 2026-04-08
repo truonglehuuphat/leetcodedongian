@@ -51,3 +51,17 @@ public:
         return count;
     }
 };
+
+nhận ra ashe sẽ bị dính độc toàn thời gian, nên tính trả về  gồm total + duration, 
+total tinh min của hiệu của thời gian sau và thời gian trước, và duration.
+
+class Solution {
+    public int findPoisonedDuration(int[] timeSeries, int duration) {
+        int count = 0;
+        if(timeSeries.length == 0 ) return 0;
+        for(int i = 0; i < timeSeries.length -1 ; i++){
+            count += Math.min(timeSeries[i+1] - timeSeries[i], duration);
+        }
+        return count + duration;
+    }
+}
