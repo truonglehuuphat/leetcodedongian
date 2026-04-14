@@ -8,7 +8,7 @@ class Solution {
             int totalMin = hour * 60+ minute;
             arr.add(totalMin);
         }
-        // Collections.sort(arr);
+        Collections.sort(arr);
         int min = 10000;
         for(int i = 0 ; i < arr.size()-1; i++){
             for(int j = i+1; j <  arr.size(); j++){
