@@ -20,47 +20,6 @@ class Solution {
         }
         return min;
     }
-
-    class Pair<K,V>{
-        private K H;
-        private V m;
-        Pair(K H, V m){
-            this.H = H;
-            this.m = m;
-        }
-        public void setKey(K H){
-            this.H = H;
-        }
-        public void setValue(V m){
-            this.m = m;
-        }
-        public K getKey(){
-            return this.H;
-        }
-        public V getValue(){
-            return this.m;
-        }
-    };
-
-    Pair<Integer,Integer> string2HHMM(String hhmm){
-        int sum = 0;
-        int hour = 0;
-        int min = 0;
-        String[] arr = hhmm.split(":");
-        hour = Integer.parseInt(arr[0]);
-        min = Integer.parseInt(arr[1]);
-        Pair<Integer,Integer> pair= new Pair<>(hour,min);
-        return pair;
-    }
-    int string2MM(String hhmm){
-        int sum = 0;
-        int hour = 0;
-        int min = 0;
-        String[] arr = hhmm.split(":");
-        hour = Integer.parseInt(arr[0]);
-        min = Integer.parseInt(arr[1]);
-        return hour*60+ min;
-    }
     int subtime(int time1, int time2){
         return Math.min(Math.abs(time1 - time2), 24*60 - Math.abs(time1 - time2));
     }
