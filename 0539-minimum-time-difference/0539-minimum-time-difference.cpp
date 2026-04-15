@@ -9,14 +9,17 @@ public:
             minutes.push_back(totalMin);
         }
         int res = 10000;
+        int diff = 0;
+        sort(minutes.begin(), minutes.end());
         for(int i = 0; i < timePoints.size()-1; i++){
-            for(int j = i + 1; j < timePoints.size(); j++){
-                int diff = min( abs(minutes[i]- minutes[j]), 24*60-abs(minutes[i]- minutes[j]));
-                if(diff < res){
-                    res = diff;
-                }
+            diff = min( abs(minutes[i]- minutes[i+1]), 24*60-abs(minutes[i]- minutes[i+1]));
+            if(diff < res){
+                res = diff;
             }
         }
+        // diff = minutes[minutes.size() - 1] - minutes[0];
+        diff = min( abs(minutes[minutes.size() - 1]- minutes[0]), 24*60-abs(minutes[0]- minutes[minutes.size() - 1]));
+        if(diff < res) res = diff;
         return res;
     }
 };
